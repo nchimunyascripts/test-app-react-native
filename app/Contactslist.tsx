@@ -1,4 +1,4 @@
-    import contacts from '@/assets/contacts'
+    import contacts from '../scripts/contacts'
     import React from 'react'
     import { SectionList, Text, SectionListData, SectionListRenderItemInfo } from 'react-native';
     import Row from './Row'

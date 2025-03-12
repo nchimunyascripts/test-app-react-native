@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, StyleSheet, View } from 'react-native';
 import Constants from 'expo-constants';
 
-import contacts , {compareNames} from '../../assets/contacts';
+import contacts , {compareNames} from '../scripts/contacts';
 import ContactsList from './Contactslist';
 import AddContactForm from './AddContactForm';
 
@@ -43,7 +43,9 @@ export default class App extends React.Component<{}, AppState> {
         <View style={{marginBottom: 5, marginTop: 10}}>
           <Button title="toggle contacts" onPress={this.toggleContacts} />
         </View>
-        <Button title='Add Contact' onPress={this.toggleForm} />
+        <View style={{marginBottom: 5}}>
+          <Button title='Add Contact' onPress={this.toggleForm} />
+        </View>
         {this.state.showContacts && <ContactsList contacts={this.state.contacts} />}
       </View>
     );
