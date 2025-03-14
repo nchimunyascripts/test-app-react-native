@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, View, StyleSheet } from 'react-native';
 
-import SectionListContacts from '../SectionListContacts';
+import SectionListContacts from '../app/SectionListContacts';
 
 export default class ContactListScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -22,10 +22,10 @@ export default class ContactListScreen extends React.Component {
   };
 
   toggleContacts = () => {
-    this.setState(prevState => ({ showContacts: !prevState.showContacts }));
+    this.setState((prevState) => ({ showContacts: !prevState.showContacts }));
   };
 
-  handleSelectContact = contact => {
+  handleSelectContact = (contact) => {
     this.props.navigation.push('ContactDetails', contact);
   };
 

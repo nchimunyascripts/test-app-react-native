@@ -8,11 +8,22 @@
   },
   "include": [
     "**/*.ts",
-    "**/*.js",
-    "**/*.jsx",
+    "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "app/AddContactForm.tsx",
-    "app/index.js"
+    "app/index.tsx",
+    "SectionListContacts.tsx",
+    "ScrollViewContacts.tsx",
+    "Row.tsx",
+    "FlatListContacts.tsx",
+    "AddContactForm.tsx",
+    "examples/1-Stack.tsx",
+    "examples/0-Switch.tsx",
+    "screens/SettingsScreen.tsx",
+    "screens/LoginScreen.tsx",
+    "screens/ContactListScreen.tsx",
+    "screens/ContactDetailsScreen.tsx",
+    "screens/AddContactScreen.tsx"
   ]
 }
