@@ -1,0 +1,11 @@
+import React from 'react';
+import AddContactForm from '@/app/AddContactForm';
+
+export default class AddContactScreen extends React.Component {
+  handleSubmit = (formState) => {
+    this.props.nagivation.nagivate('ContactList');
+  };
+  render() {
+    return <AddContactForm onSubmit={this.handleSubmit} />;
+  }
+}

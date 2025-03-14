@@ -2,65 +2,44 @@ import React from 'react';
 import { Button, StyleSheet, View } from 'react-native';
 import Constants from 'expo-constants';
 
-import contacts , {compareNames} from '../scripts/contacts';
-import ContactsList from './ContactsList';
-import AddContactForm from './AddContactForm';
+import contacts, { compareNames } from '../scripts/contacts';
+import ContactsListScreen from '../screens/ContactListScreen';
+import AddContactScreen from '../screens/AddContactScreen';
+import { createSwitchNavigator } from 'react-navigation';
 
+// import Example from './Example';
+// export default Example;
 // interface Contact {
 //   name: string;
 //   phone: string
 // }
 
-interface AppState {
-  showContacts: boolean;
-  showForm: boolean;
-  contacts: Contact[];
-}
+// interface AppState {
+//   showContacts: boolean;
+//   contacts: Contact[];
+// }
 
-export default class App extends React.Component<{}, AppState> {
-  state: AppState = {
-    showContacts: false,
-    showForm: false,
+const AppNavigator = createSwitchNavigator(
+  {
+    AddContact: AddContactScreen,
+    ContactsList: ContactsListScreen,
+  },
+  { initialRouteName: 'ContactList' },
+);
+export default class App extends React.Component {
+  state = {
+    showContacts: true,
     contacts: contacts,
-  }
+  };
 
   addContact = (newContact: any) => {
-    this.setState(prevState => ({showForm: false, contacts: [...prevState.contacts, newContact]}))
-  }
-
-  toggleContacts = () => {
-    this.setState(prevState => ({showContacts: !prevState.showContacts}))
-  }
-
-  toggleForm = () => {
-    this.setState(prevState => ({showForm: !prevState.showForm}))
-  }
-
-  sort = () => {
-    this.setState(prevState => ({contacts: [...prevState.contacts].sort(compareNames),}))
-  }
+    this.setState((prevState) => ({
+      showForm: false,
+      contacts: [...prevState.contacts, newContact],
+    }));
+  };
 
   render() {
-    if (this.state.showForm) return <AddContactForm onSubmit={this.addContact} />
-    return (
-      <View style={styles.container}>
-        <View style={{marginBottom: 5, marginTop: 10}}>
-          <Button title="toggle contacts" onPress={this.toggleContacts} />
-        </View>
-        <View style={{marginBottom: 5}}>
-          <Button title='Add Contact' onPress={this.toggleForm} />
-        </View>
-        {this.state.showContacts && <ContactsList contacts={this.state.contacts} />}
-      </View>
-    );
+    return <AppNavigator screenProps={{ contacts: this.state.contacts }} />;
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    padding: 20,
-    paddingTop: Constants.statusBarHeight,
-  },
-});
