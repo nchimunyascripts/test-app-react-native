@@ -1,28 +1,74 @@
+// import Example from './examples/0-Switch';
+import Example from './examples/1-Stack';
+export default Example;
+
 // import React from 'react';
-// import { StyleSheet } from 'react-native';
-// import Constants from 'expo-constants';
+// import { StatusBar, View } from 'react-native';
+// import {
+//   createStackNavigator,
+//   createSwitchNavigator,
+//   createBottomTabNavigator,
+// } from 'react-navigation';
+// import Ionicons from 'react-native-vector-icons/Ionicons';
 
-// import contacts, { compareNames } from '../scripts/contacts';
-// import { createSwitchNavigator } from 'react-navigation';
 // import AddContactScreen from '../screens/AddContactScreen';
+// import SettingsScreen from '../screens/SettingsScreen';
 // import ContactListScreen from '../screens/ContactListScreen';
+// import ContactDetailsScreen from '../screens/ContactDetailsScreen';
+// import LoginScreen from '../screens/LoginScreen';
+// import contacts from '../scripts/contacts';
 
-// const AppNavigator = createSwitchNavigator(
+// const MainStack = createStackNavigator(
 //   {
-//     AddContact: AddContactScreen,
 //     ContactList: ContactListScreen,
+//     ContactDetails: ContactDetailsScreen,
+//     AddContact: AddContactScreen,
 //   },
-//   { initialRouteName: 'ContactList' },
+//   {
+//     initialRouteName: 'ContactList',
+//     navigationOptions: {
+//       headerTintColor: '#a41034',
+//       headerStyle: {
+//         backgroundColor: '#fff',
+//       },
+//     },
+//   },
 // );
+
+// MainStack.navigationOptions = {
+//   tabBarIcon: ({ focused, tintColor }) => (
+//     <Ionicons
+//       name={`ios-contacts${focused ? '' : '-outline'}`}
+//       size={25}
+//       color={tintColor}
+//     />
+//   ),
+// };
+
+// const MainTabs = createBottomTabNavigator(
+//   {
+//     Contacts: MainStack,
+//     Settings: SettingsScreen,
+//   },
+//   {
+//     tabBarOptions: {
+//       activeTintColor: '#a41034',
+//     },
+//   },
+// );
+
+// const AppNavigator = createSwitchNavigator({
+//   Login: LoginScreen,
+//   Main: MainTabs,
+// });
 
 // export default class App extends React.Component {
 //   state = {
-//     contacts: contacts,
+//     contacts,
 //   };
 
 //   addContact = (newContact) => {
 //     this.setState((prevState) => ({
-//       showForm: false,
 //       contacts: [...prevState.contacts, newContact],
 //     }));
 //   };
@@ -38,15 +84,3 @@
 //     );
 //   }
 // }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     paddingLeft: 10,
-//     paddingRight: 10,
-//     backgroundColor: '#fff',
-//     paddingTop: Constants.statusBarHeight,
-//   },
-// });
-import Example from './0-example';
-export default Example;

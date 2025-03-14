@@ -6,25 +6,6 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import Constants from 'expo-constants';
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    paddingTop: Constants.statusBarHeight,
-    justifyContent: 'center',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: 'black',
-    minWidth: 100,
-    marginTop: 20,
-    marginHorizontal: 20,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 3,
-  },
-});
 
 export default class AddContactForm extends React.Component {
   state = {
@@ -42,7 +23,7 @@ export default class AddContactForm extends React.Component {
     }
   }
 
-  getHandler = (key) => (val) => {
+  getHandler = key => val => {
     this.setState({ [key]: val });
   };
 
@@ -55,7 +36,7 @@ export default class AddContactForm extends React.Component {
   }
   */
 
-  handlePhoneChange = (phone) => {
+  handlePhoneChange = phone => {
     if (+phone >= 0 && phone.length <= 10) {
       this.setState({ phone });
     }
@@ -118,3 +99,19 @@ export default class AddContactForm extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: 'black',
+    minWidth: 100,
+    marginTop: 20,
+    marginHorizontal: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 3,
+  },
+});

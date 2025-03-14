@@ -1,31 +1,43 @@
-import SectionListContacts from '../components/SectionListContacts';
-import React, { Component } from 'react';
-import { StyleSheet, View, Button } from 'react-native';
-import Constants from 'expo-constants';
+import React from 'react';
+import { Button, View, StyleSheet } from 'react-native';
 
-export default class ContactListScreen extends Component {
+import SectionListContacts from '../SectionListContacts';
+
+export default class ContactListScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: 'Contacts',
+      headerRight: (
+        <Button
+          title="Add"
+          onPress={() => navigation.navigate('AddContact')}
+          color="#a41034"
+        />
+      ),
+    };
+  };
+
   state = {
-    showContacts: false,
+    showContacts: true,
   };
 
   toggleContacts = () => {
-    this.setState((prevState) => ({ showContacts: !prevState.showContacts }));
+    this.setState(prevState => ({ showContacts: !prevState.showContacts }));
   };
 
-  showForm = () => {
-    this.props.navigation.navigate('AddContact');
+  handleSelectContact = contact => {
+    this.props.navigation.push('ContactDetails', contact);
   };
+
   render() {
     return (
       <View style={styles.container}>
-        <View style={{ marginBottom: 5, marginTop: 10 }}>
-          <Button title="toggle contacts" onPress={this.toggleContacts} />
-        </View>
-        <View style={{ marginBottom: 5 }}>
-          <Button title="Add Contact" onPress={this.showForm} />
-        </View>
+        <Button title="toggle contacts" onPress={this.toggleContacts} />
         {this.state.showContacts && (
-          <SectionListContacts contacts={this.props.screenProps.contacts} />
+          <SectionListContacts
+            contacts={this.props.screenProps.contacts}
+            onSelectContact={this.handleSelectContact}
+          />
         )}
       </View>
     );
@@ -35,8 +47,5 @@ export default class ContactListScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    padding: 20,
-    paddingTop: Constants.statusBarHeight,
   },
 });
