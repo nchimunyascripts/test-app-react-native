@@ -1,9 +1,9 @@
 import React from 'react';
-import { createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 import { Button, View } from 'react-native';
 
 class ScreenComponentOne extends React.Component {
-  render(): React.ReactNode {
+  render() {
     return (
       <View
         style={{
@@ -26,7 +26,7 @@ class ScreenComponentOne extends React.Component {
 }
 
 class ScreenComponentTwo extends React.Component {
-  render(): React.ReactNode {
+  render() {
     return (
       <View
         style={{
@@ -48,13 +48,13 @@ class ScreenComponentTwo extends React.Component {
   }
 }
 
-const AppNavigator = createSwitchNavigator({
+const AppNavigator = createStackNavigator({
   RouteNameOne: ScreenComponentOne,
   RouteNameTwo: ScreenComponentTwo,
 });
 
 export default class Example extends React.Component {
-  render(): React.ReactNode {
+  render() {
     return <AppNavigator />;
   }
 }

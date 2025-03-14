@@ -12,6 +12,7 @@
     "**/*.jsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "app/AddContactForm.tsx"
+    "app/AddContactForm.tsx",
+    "app/index.js"
   ]
 }
