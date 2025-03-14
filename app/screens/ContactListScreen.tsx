@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, View, StyleSheet } from 'react-native';
 
-import SectionListContacts from '../app/SectionListContacts';
+import SectionListContacts from '../SectionListContacts';
 
 export default class ContactListScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {

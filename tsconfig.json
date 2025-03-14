@@ -18,12 +18,12 @@
     "Row.tsx",
     "FlatListContacts.tsx",
     "AddContactForm.tsx",
-    "examples/1-Stack.tsx",
-    "examples/0-Switch.tsx",
-    "screens/SettingsScreen.tsx",
-    "screens/LoginScreen.tsx",
-    "screens/ContactListScreen.tsx",
-    "screens/ContactDetailsScreen.tsx",
-    "screens/AddContactScreen.tsx"
+    "app/examples/1-Stack.tsx",
+    "app/examples/0-Switch.tsx",
+    "app/screens/SettingsScreen.tsx",
+    "app/screens/LoginScreen.tsx",
+    "app/screens/ContactListScreen.tsx",
+    "app/screens/ContactDetailsScreen.tsx",
+    "app/screens/AddContactScreen.tsx"
   ]
 }

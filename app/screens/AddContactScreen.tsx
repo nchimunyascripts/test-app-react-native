@@ -1,5 +1,5 @@
 import React from 'react';
-import AddContactForm from '../app/AddContactForm';
+import AddContactForm from '../AddContactForm';
 
 export default class AddContactScreen extends React.Component {
   static navigationOptions = {
