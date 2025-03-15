@@ -3,27 +3,15 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     }
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts",
-    "app/AddContactForm.tsx",
-    "app/index.tsx",
-    "SectionListContacts.tsx",
-    "ScrollViewContacts.tsx",
-    "Row.tsx",
-    "FlatListContacts.tsx",
-    "AddContactForm.tsx",
-    "app/examples/1-Stack.tsx",
-    "app/examples/0-Switch.tsx",
-    "app/screens/SettingsScreen.tsx",
-    "app/screens/LoginScreen.tsx",
-    "app/screens/ContactListScreen.tsx",
-    "app/screens/ContactDetailsScreen.tsx",
-    "app/screens/AddContactScreen.tsx"
+    "expo-env.d.ts"
   ]
 }
