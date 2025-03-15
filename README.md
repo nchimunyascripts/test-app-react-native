@@ -30,7 +30,7 @@ This project is a **React Native application** built with **Expo**, designed to 
 1. Clone the repository:
    ```sh
    git clone https://github.com/nchimunyascripts/test-app-react-native
-   cd react-native-expo-testing
+   cd test-app-react-native
    ```
 2. Install dependencies:
    ```sh
