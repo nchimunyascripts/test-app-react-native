@@ -16,41 +16,50 @@ class Store {
     this.state = this.reducer(this.state, update);
   }
 }
+const UPDATE_USER = 'UPDATE_USER';
+const UPDATE_CONTACT = 'UPDATE_CONTACT';
 
-const contactReducer = (state, newConatct) => [...state, newConatct];
-const userReducer = (state, update) => merger(state, update);
-
-const DEFAULT_STATE = { user: {}, contacts: [] };
-const reducer = (state, action) => {
-  if (action.type === 'UPDATE_USER') {
-    return merger(state, {
-      user: userReducer(state.user, action.playload),
-    });
-  }
-  if (action.type === 'UPDATE_CONTACT') {
-    return merger(state, {
-      contacts: contactReducer(state.contacts, action.payload),
-    });
+const contactReducer = (state, action) => {
+  if (action.type === UPDATE_CONTACT) {
+    return [...state, action.payload];
   }
   return state;
 };
 
-const x = new Store(reducer, DEFAULT_STATE);
+const userReducer = (state, action) => {
+  if (action.type === UPDATE_USER) {
+    return merger(state, action.payload);
+  }
+  if (action.type === UPDATE_CONTACT)
+    return merger(state, { prevContact: action.payload });
+  return state;
+};
 
-x.dispatch({ type: 'UPDATE_USER', playload: { foo: 'foo' } });
-x.dispatch({ type: 'UPDATE_USER', playload: { bar: 'bar' } });
-x.dispatch({ type: 'UPDATE_USER', playload: { foo: 'baz' } });
-x.dispatch({
-  type: 'UPDATE_CONTACT',
-  playload: { name: 'John', number: '123456789' },
-});
-x.dispatch({
-  type: 'UPDATE_CONTACT',
-  playload: { name: 'Sam', number: '123456789' },
-});
-x.dispatch({
-  type: 'UPDATE_CONTACT',
-  playload: { name: 'Peter', number: '123456789' },
+const DEFAULT_STATE = { user: {}, contacts: [] };
+
+const reducer = (state, action) => ({
+  user: userReducer(state.user, action),
+  contacts: contactReducer(state.contacts, action),
 });
 
-console.log(x.getState());
+const updateUser = (update) => ({
+  type: UPDATE_USER,
+  payload: update,
+});
+
+const addContact = (newContact) => ({
+  type: UPDATE_CONTACT,
+  payload: newContact,
+});
+
+const store = new Store(reducer, DEFAULT_STATE);
+store.dispatch(updateUser({ foo: 'foo' }));
+store.dispatch(updateUser({ bar: 'bar' }));
+store.dispatch(updateUser({ foo: 'baz' }));
+
+store.dispatch(addContact({ name: 'John', number: '123456789' }));
+store.dispatch(addContact({ name: 'Sam', number: '123456789' }));
+store.dispatch(addContact({ name: 'Able', number: '123456789' }));
+store.dispatch(addContact({ name: 'Peter', number: '123456789' }));
+
+console.log(store.getState());
