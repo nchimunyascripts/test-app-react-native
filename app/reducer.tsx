@@ -1,65 +1,60 @@
-const merger = (prev, next) => Object.assign({}, prev, next);
-// const reducer = (state, update) => merger(state, update);
+import { combineReducers } from 'redux';
+import { UPDATE_CONTACT, UPDATE_USER, ActionTypes } from './actions'; // Import the action types and interfaces
 
-let state = {};
-class Store {
-  constructor(reducer, initialState) {
-    this.reducer = reducer;
-    this.state = initialState;
-  }
-
-  getState() {
-    return this.state;
-  }
-
-  dispatch(update) {
-    this.state = this.reducer(this.state, update);
-  }
+// Define the shape of the state
+interface UserState {
+  // Define the structure of the user state
+  name?: string;
+  email?: string;
+  prevContact?: {
+    name: string;
+    phone: string;
+  };
 }
-const UPDATE_USER = 'UPDATE_USER';
-const UPDATE_CONTACT = 'UPDATE_CONTACT';
 
-const contactReducer = (state, action) => {
+interface ContactState {
+  // Define the structure of the contacts state
+  name: string;
+  phone: string;
+}
+
+// Define the root state
+export interface RootState {
+  user: UserState;
+  contacts: ContactState[];
+}
+
+// Utility function to merge objects
+const merger = <T,>(prev: T, next: Partial<T>): T =>
+  Object.assign({}, prev, next);
+
+// Contact reducer
+const contactReducer = (
+  state: ContactState[] = [],
+  action: ActionTypes,
+): ContactState[] => {
   if (action.type === UPDATE_CONTACT) {
     return [...state, action.payload];
   }
   return state;
 };
 
-const userReducer = (state, action) => {
-  if (action.type === UPDATE_USER) {
-    return merger(state, action.payload);
+// User reducer
+const userReducer = (state: UserState = {}, action: ActionTypes): UserState => {
+  switch (action.type) {
+    case UPDATE_USER:
+      return merger(state, action.payload);
+    case UPDATE_CONTACT:
+      return merger(state, { prevContact: action.payload });
+    default:
+      return state;
   }
-  if (action.type === UPDATE_CONTACT)
-    return merger(state, { prevContact: action.payload });
-  return state;
 };
 
-const DEFAULT_STATE = { user: {}, contacts: [] };
-
-const reducer = (state, action) => ({
-  user: userReducer(state.user, action),
-  contacts: contactReducer(state.contacts, action),
+// Combine reducers
+const reducer = combineReducers<RootState>({
+  user: userReducer,
+  contacts: contactReducer,
 });
 
-const updateUser = (update) => ({
-  type: UPDATE_USER,
-  payload: update,
-});
-
-const addContact = (newContact) => ({
-  type: UPDATE_CONTACT,
-  payload: newContact,
-});
-
-const store = new Store(reducer, DEFAULT_STATE);
-store.dispatch(updateUser({ foo: 'foo' }));
-store.dispatch(updateUser({ bar: 'bar' }));
-store.dispatch(updateUser({ foo: 'baz' }));
-
-store.dispatch(addContact({ name: 'John', number: '123456789' }));
-store.dispatch(addContact({ name: 'Sam', number: '123456789' }));
-store.dispatch(addContact({ name: 'Able', number: '123456789' }));
-store.dispatch(addContact({ name: 'Peter', number: '123456789' }));
-
-console.log(store.getState());
+export default reducer;
